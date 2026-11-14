@@ -2,7 +2,7 @@ import React from 'react';
 import { AbsoluteFill, Audio, staticFile, useCurrentFrame, useVideoConfig } from 'remotion';
 import { withFonts } from './lib/fonts';
 import { COLORS, MONO, SANS, TYPE } from './lib/theme';
-import { barAt, beatIndexAt, fmtTime, flash, sinceBeat } from './lib/beats';
+import { barAt, beatIndexAt, fmtDuration, fmtTime, flash, sinceBeat } from './lib/beats';
 import {
   AUDIO_SRC,
   BEATS,
@@ -249,7 +249,7 @@ const PipelineTestInner: React.FC = () => {
         <div style={{ fontSize: 46, fontWeight: 700, marginTop: 12, letterSpacing: 2 }}>我记得</div>
         <div style={{ fontSize: 26, marginTop: 8, opacity: 0.85 }}>我带着比身体重的行李</div>
         <div style={{ fontFamily: MONO, fontSize: 22, marginTop: 14, color: COLORS.muted }}>
-          JetBrains Mono · 0123456789 · 05:29.89
+          JetBrains Mono · 0123456789 · {fmtDuration(SONG_DURATION)}
         </div>
         <div style={{ fontFamily: MONO, fontSize: 18, marginTop: 22, color: COLORS.muted, letterSpacing: 1 }}>
           {PIPELINE_TEST_START.toFixed(2)}s → {(PIPELINE_TEST_START + 12).toFixed(2)}s

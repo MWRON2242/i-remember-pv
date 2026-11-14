@@ -51,6 +51,14 @@ export function fmtTime(t: number, fps = 30): string {
   return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}.${String(f).padStart(2, '0')}`;
 }
 
+/** 时长 m:ss.ss（给人读的「长度」，不是时间码，所以不用帧） */
+export function fmtDuration(t: number, digits = 2): string {
+  const safe = !isFinite(t) || t < 0 ? 0 : t;
+  const m = Math.floor(safe / 60);
+  const s = safe - m * 60;
+  return `${m}:${s.toFixed(digits).padStart(3 + digits, '0')}`;
+}
+
 /** 固定种子的伪随机：同一帧永远得到同一个数，保证可复现 */
 export function prng(n: number): number {
   let s = (Math.floor(n) * 1664525 + 1013904223) >>> 0;

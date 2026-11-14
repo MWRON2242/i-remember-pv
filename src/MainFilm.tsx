@@ -2,7 +2,7 @@ import React from 'react';
 import { AbsoluteFill, Audio, interpolate, staticFile, useCurrentFrame, useVideoConfig } from 'remotion';
 import { withFonts } from './lib/fonts';
 import { COLORS, MONO, SANS, TYPE } from './lib/theme';
-import { fmtTime } from './lib/beats';
+import { fmtDuration, fmtTime } from './lib/beats';
 import {
   AUDIO_SRC,
   BPM,
@@ -123,7 +123,7 @@ const MainFilmInner: React.FC = () => {
                 letterSpacing: 1,
               }}
             >
-              <span>音源 {fmtTime(SONG_DURATION, fps)}</span>
+              <span>音源 {fmtDuration(SONG_DURATION)}</span>
               <span>{BPM.toFixed(2)} BPM</span>
               <span>{BEATS.length} 拍</span>
               <span>{LYRIC_COUNT} 句歌词</span>
