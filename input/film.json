@@ -1,0 +1,15 @@
+{
+  "_说明": "全片唯一的画幅与音源常量。改这里，不用翻代码；src/lib/song.ts 是唯一读取入口。",
+  "title": "我记得",
+  "artist": "赵雷",
+  "audio": "audio/song.mp3",
+  "fps": 30,
+  "width": 1920,
+  "height": 1080,
+  "outroSeconds": 6,
+  "credits": [
+    { "text": "作词 / 作曲 / 原唱　赵雷", "kind": "source" },
+    { "text": "本片为非商业同人创作，仅用于学习与交流", "kind": "notice" },
+    { "text": "视觉概念 / 分镜 / 代码　（待署名）", "kind": "credit" }
+  ]
+}

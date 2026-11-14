@@ -1,0 +1,5 @@
+{
+  "_说明": "Codex 交付资产的登记表。file 相对 public/assets/；width/height 是设计像素（渲染时按需缩放）。代码侧入口：src/lib/assets.ts 的 img(id)，不要手写绝对路径。",
+  "version": 1,
+  "assets": []
+}
