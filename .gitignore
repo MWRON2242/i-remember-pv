@@ -43,3 +43,16 @@ input/lyrics.json
 .idea/
 *.log
 *.remotion-in-progress
+
+# ¸è´ÊÉú³ÉÎï£ºÊÜ°æÈ¨±£»¤£¬²»½ø¹«¿ª²Ö¿â
+src/data/lyrics.ts
+
+# å‚è€ƒä»“åº“ä¸æœ¬åœ°å·¥å…·é“¾ï¼ˆuv / python / RVC æ¨¡å‹ï¼Œ1.9GBï¼‰
+.tools/
+_refs/
+
+# æ‹¼æ¥ä¸ä¸´æ—¶æ–‡ä»¶
+concat.txt
+out/_*.wav
+out/_*.bmp
+out/_*.jpg

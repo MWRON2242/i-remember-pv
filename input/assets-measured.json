@@ -1,0 +1,245 @@
+{
+  "_说明": "由 tools/measure-assets.mjs 生成，记录每张资产的 alpha 包围盒，用于对齐锚点。",
+  "assets": [
+    {
+      "id": "sub.ai.maid-idle",
+      "file": "subject/ai.maid-idle.png",
+      "w": 941,
+      "h": 1671,
+      "bbox": {
+        "x": 15,
+        "y": 8,
+        "w": 914,
+        "h": 1655
+      },
+      "footY": 1662,
+      "centerX": 472,
+      "height": 1655
+    },
+    {
+      "id": "sub.ai.maid-carry",
+      "file": "subject/ai.maid-carry.png",
+      "w": 1034,
+      "h": 1521,
+      "bbox": {
+        "x": 135,
+        "y": 23,
+        "w": 831,
+        "h": 1482
+      },
+      "footY": 1504,
+      "centerX": 550.5,
+      "height": 1482
+    },
+    {
+      "id": "sub.ai.maid-empty",
+      "file": "subject/ai.maid-empty.png",
+      "w": 941,
+      "h": 1670,
+      "bbox": {
+        "x": 135,
+        "y": 110,
+        "w": 715,
+        "h": 1481
+      },
+      "footY": 1590,
+      "centerX": 492.5,
+      "height": 1481
+    },
+    {
+      "id": "sub.ai.maid-withheld",
+      "file": "subject/ai.maid-withheld.png",
+      "w": 951,
+      "h": 1653,
+      "bbox": {
+        "x": 3,
+        "y": 10,
+        "w": 941,
+        "h": 1643
+      },
+      "footY": 1652,
+      "centerX": 473.5,
+      "height": 1643
+    },
+    {
+      "id": "sub.ai.maid-back",
+      "file": "subject/ai.maid-back.png",
+      "w": 942,
+      "h": 1670,
+      "bbox": {
+        "x": 10,
+        "y": 6,
+        "w": 923,
+        "h": 1650
+      },
+      "footY": 1655,
+      "centerX": 471.5,
+      "height": 1650
+    },
+    {
+      "id": "sub.ai.maid-sit",
+      "file": "subject/ai.maid-sit.png",
+      "w": 1102,
+      "h": 1428,
+      "bbox": {
+        "x": 12,
+        "y": 9,
+        "w": 1081,
+        "h": 1410
+      },
+      "footY": 1418,
+      "centerX": 552.5,
+      "height": 1410
+    },
+    {
+      "id": "sub.ai.maid-handoff",
+      "file": "subject/ai.maid-handoff.png",
+      "w": 941,
+      "h": 1670,
+      "bbox": {
+        "x": 22,
+        "y": 6,
+        "w": 906,
+        "h": 1656
+      },
+      "footY": 1661,
+      "centerX": 475,
+      "height": 1656
+    },
+    {
+      "id": "sub.ai.maid-tired",
+      "file": "subject/ai.maid-tired.png",
+      "w": 1176,
+      "h": 1337,
+      "bbox": {
+        "x": 11,
+        "y": 15,
+        "w": 1155,
+        "h": 1313
+      },
+      "footY": 1327,
+      "centerX": 588.5,
+      "height": 1313
+    },
+    {
+      "id": "sub.ai.maid-run",
+      "file": "subject/ai.maid-run.png",
+      "w": 1228,
+      "h": 1281,
+      "bbox": {
+        "x": 47,
+        "y": 15,
+        "w": 1036,
+        "h": 1242
+      },
+      "footY": 1256,
+      "centerX": 565,
+      "height": 1242
+    },
+    {
+      "id": "sub.ai.maid-pout",
+      "file": "subject/ai.maid-pout.png",
+      "w": 1024,
+      "h": 1536,
+      "bbox": {
+        "x": 30,
+        "y": 9,
+        "w": 972,
+        "h": 1515
+      },
+      "footY": 1523,
+      "centerX": 516,
+      "height": 1515
+    },
+    {
+      "id": "sub.user-stand",
+      "file": "subject/user-stand.png",
+      "w": 1024,
+      "h": 1536,
+      "bbox": {
+        "x": 283,
+        "y": 3,
+        "w": 448,
+        "h": 1527
+      },
+      "footY": 1529,
+      "centerX": 507,
+      "height": 1527
+    },
+    {
+      "id": "sub.user-wave",
+      "file": "subject/user-wave.png",
+      "w": 1312,
+      "h": 1199,
+      "bbox": {
+        "x": 11,
+        "y": 7,
+        "w": 1288,
+        "h": 1192
+      },
+      "footY": 1198,
+      "centerX": 655,
+      "height": 1192
+    },
+    {
+      "id": "sub.user-kneel",
+      "file": "subject/user-kneel.png",
+      "w": 1536,
+      "h": 1024,
+      "bbox": {
+        "x": 255,
+        "y": 9,
+        "w": 950,
+        "h": 1006
+      },
+      "footY": 1014,
+      "centerX": 730,
+      "height": 1006
+    },
+    {
+      "id": "sub.pair-run",
+      "file": "subject/pair-run.png",
+      "w": 1536,
+      "h": 1024,
+      "bbox": {
+        "x": 65,
+        "y": 20,
+        "w": 1445,
+        "h": 991
+      },
+      "footY": 1010,
+      "centerX": 787.5,
+      "height": 991
+    },
+    {
+      "id": "sub.pair-stand",
+      "file": "subject/pair-stand.png",
+      "w": 1536,
+      "h": 1024,
+      "bbox": {
+        "x": 182,
+        "y": 15,
+        "w": 1106,
+        "h": 1000
+      },
+      "footY": 1014,
+      "centerX": 735,
+      "height": 1000
+    },
+    {
+      "id": "sub.pair-hug",
+      "file": "subject/pair-hug.png",
+      "w": 1024,
+      "h": 1536,
+      "bbox": {
+        "x": 135,
+        "y": 12,
+        "w": 783,
+        "h": 1516
+      },
+      "footY": 1527,
+      "centerX": 526.5,
+      "height": 1516
+    }
+  ]
+}

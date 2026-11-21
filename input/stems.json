@@ -1,0 +1,31 @@
+{
+  "_说明": "伴奏分轨登记表。文件在 public/audio/stems/（不入库）。源目录 D:\\音乐\\我记得 里是用户自己用 UVR 分离的四轨。",
+  "sourceDir": "D:\\音乐\\我记得",
+  "sourceFormat": "mp3 320k 立体声 44.1kHz",
+  "duration": 329.93,
+  "offsetMs": 23.04,
+  "offsetNote": "与 public/audio/song.mp3 相比，分离轨整体「晚」23.04 毫秒（508 样点 @22050，1016 样点 @44100）。补偿后波形相关系数 0.94~0.98，确认为同一版母带。任何把分离轨与原曲混用的地方，必须先提前 23.04ms。",
+  "alignmentEvidence": {
+    "method": "滑动互相关，窗口 100-106s / 160-166s / 30-36s",
+    "instrumentalVsMaster": [0.937, 0.975, 0.555],
+    "vocalVsMaster": [0.376, 0.279, 0.857]
+  },
+  "cleanliness": {
+    "vocalSilenceBeforeHum": "-126 dB（0-12s 绝对静音，说明分离很干净、无串音）",
+    "stemCrossCorrelation": "四轨之间互相关系数 ≈ 0（不是复制、不是简单串音）"
+  },
+  "stems": [
+    { "id": "vocal", "file": "audio/stems/vocal.mp3", "role": "人声（干）", "use": "SVC/变声输入、关键时刻抽掉主唱用" },
+    { "id": "other", "file": "audio/stems/other.mp3", "role": "其他乐器（吉他/键盘/弦乐等）", "use": "伴奏层" },
+    { "id": "bass", "file": "audio/stems/bass.mp3", "role": "贝斯", "use": "伴奏层" },
+    { "id": "drums", "file": "audio/stems/drums.mp3", "role": "鼓", "use": "伴奏层" }
+  ],
+  "_音乐事实": {
+    "人声哼唱起点": 13.5,
+    "人声哼唱实起": 14.8,
+    "人声哼唱收": 27.4,
+    "静默呼吸": "27.4 → 28.35（约 0.95 秒，只剩极轻气声）",
+    "第一句词": 28.35,
+    "备注": "LRC 未记录 13.5-27.4 的无词哼唱。这是前奏真正的结构支点，详见 docs/HANDOFF.md。"
+  }
+}

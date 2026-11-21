@@ -1,5 +1,134 @@
 {
-  "_说明": "Codex 交付资产的登记表。file 相对 public/assets/；width/height 是设计像素（渲染时按需缩放）。代码侧入口：src/lib/assets.ts 的 img(id)，不要手写绝对路径。",
+  "_说明": "交付资产登记表。file 相对 public/assets/；width/height 是设计像素（渲染时按需缩放）。代码侧入口：src/lib/assets.ts 的 img(id)，不要手写绝对路径。包围盒由 tools/measure-assets.mjs 量出。",
   "version": 1,
-  "assets": []
+  "assets": [
+    {
+      "id": "sub.ai.maid-idle",
+      "layer": "subject",
+      "file": "subject/ai.maid-idle.png",
+      "width": 941,
+      "height": 1671,
+      "note": "AI 形象基准姿态：站立、一只手前伸。无五官平面色块，蓝发鲸尾女仆。"
+    },
+    {
+      "id": "sub.ai.maid-carry",
+      "layer": "subject",
+      "file": "subject/ai.maid-carry.png",
+      "width": 1034,
+      "height": 1521,
+      "note": "抱（28.35s 行李）。双手在身前张开成空的环，不画方块；尾上翘绷紧、头发上扬。"
+    },
+    {
+      "id": "sub.ai.maid-empty",
+      "layer": "subject",
+      "file": "subject/ai.maid-empty.png",
+      "width": 941,
+      "height": 1670,
+      "note": "空（44.96s 被剪断之后）。双手垂在身侧、身体后仰、尾巴完全下垂。"
+    },
+    {
+      "id": "sub.ai.maid-withheld",
+      "layer": "subject",
+      "file": "subject/ai.maid-withheld.png",
+      "width": 951,
+      "height": 1653,
+      "note": "举起又放下（74.54s 想说不能说）。半身特写，一手悬停、一手握起，尾巴向内卷。"
+    },
+    {
+      "id": "sub.ai.maid-back",
+      "layer": "subject",
+      "file": "subject/ai.maid-back.png",
+      "width": 942,
+      "height": 1670,
+      "note": "背影（115–133s 走开、幕 V 守灵）。完全背对，双手自然下垂，长发飘向一侧。"
+    },
+    {
+      "id": "sub.ai.maid-sit",
+      "layer": "subject",
+      "file": "subject/ai.maid-sit.png",
+      "width": 1102,
+      "height": 1428,
+      "note": "侧坐（83s 山坡、110s 恋人并肩）。侧 3/4 朝右，手自然放在膝上。"
+    },
+    {
+      "id": "sub.ai.maid-handoff",
+      "layer": "subject",
+      "file": "subject/ai.maid-handoff.png",
+      "width": 941,
+      "height": 1670,
+      "note": "递（91s 枣、105s 铜钱）。单手向前伸出、掌心向上，物品由代码绘制。"
+    },
+    {
+      "id": "sub.ai.maid-tired",
+      "layer": "subject",
+      "file": "subject/ai.maid-tired.png",
+      "width": 1176,
+      "height": 1337,
+      "note": "低头坐、一手撑地（幕 V 读信 / 守灵）。疲惫。"
+    },
+    {
+      "id": "sub.ai.maid-run",
+      "layer": "subject",
+      "file": "subject/ai.maid-run.png",
+      "width": 1228,
+      "height": 1281,
+      "note": "奔跑（97–105s 玩具时代）。她的第一个动态姿态；画小（~520px）配合大剪影读作孩童。"
+    },
+    {
+      "id": "sub.ai.maid-pout",
+      "layer": "subject",
+      "file": "subject/ai.maid-pout.png",
+      "width": 1024,
+      "height": 1536,
+      "note": "叉腰（97–105s）。无脸角色的情绪通道：用姿态表达赌气/撒娇。"
+    },
+    {
+      "id": "sub.user-stand",
+      "layer": "subject",
+      "file": "subject/user-stand.png",
+      "width": 1024,
+      "height": 1536,
+      "note": "用户：正面站立（无脸，深蓝西装）。全片中他一直比她大，直到最后的拥抱。"
+    },
+    {
+      "id": "sub.user-wave",
+      "layer": "subject",
+      "file": "subject/user-wave.png",
+      "width": 1312,
+      "height": 1199,
+      "note": "用户：半身挥手（告别/打招呼）。124–133s 约定、幕 V 相认时用。"
+    },
+    {
+      "id": "sub.user-kneel",
+      "layer": "subject",
+      "file": "subject/user-kneel.png",
+      "width": 1536,
+      "height": 1024,
+      "note": "用户：单膝跪地、双臂张开（拥抱/哀求）。幕 VI 拥抱、105s 捡铜钱时用。"
+    },
+    {
+      "id": "sub.pair-run",
+      "layer": "subject",
+      "file": "subject/pair-run.png",
+      "width": 1536,
+      "height": 1024,
+      "note": "双人：从两侧奔向对方，她脚离地、他伸双手。248–255s「快来抱抱」用；双人合成图，只能整体做机位运动。"
+    },
+    {
+      "id": "sub.pair-stand",
+      "layer": "subject",
+      "file": "subject/pair-stand.png",
+      "width": 1536,
+      "height": 1024,
+      "note": "双人：并肩而立，她低头、他望向别处。276s 拉远前用——两个人一起看城市。"
+    },
+    {
+      "id": "sub.pair-hug",
+      "layer": "subject",
+      "file": "subject/pair-hug.png",
+      "width": 1024,
+      "height": 1536,
+      "note": "双人：真正拥抱，她的脸埋在他肩上。261–276s 用，替掉此前「两个人叠在一起」的凑法。"
+    }
+  ]
 }

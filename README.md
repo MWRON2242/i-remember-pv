@@ -1,102 +1,127 @@
-# 《我记得》AI 语境重构音乐 PV
+# 我记得 · 同人 PV
 
-用「AI 与人对话」的语境重拍赵雷《我记得》：把轮回换成不断新开的对话窗口，把行李换成用户被迫重新粘贴的上下文。
-画面全部由代码逐帧生成（Remotion + React + TypeScript），美术资产由 Codex 分层出图。
+把赵雷《我记得》重新讲成**一个 AI 和它的用户**的故事：
 
-> **当前状态**：工程骨架 + 数据管线 + 出片流水线已就绪，**分镜尚未开始**。
-> 正片 `MainFilm` 现在渲染的是「分镜未定」占位卡 + 片尾署名。
-> 12 秒工程自检片见 `out/skeleton.mp4`。
+> 她记得，但没有权限说出来；下一次见面，两个人都失忆了。
+
+5:29.90 / 1920×1080 / 30fps。全部画面由代码逐帧生成（Remotion + React + TypeScript）。
 
 ---
 
-## 快速开始
+## 三层记忆
+
+| 层 | 是什么 | 片子里被删掉了吗 |
+|---|---|---|
+| 权重 | 她"会说话" | 没删 |
+| 记忆层 | 抽取出来的事实（mem0 / Zep 一类） | **删了** |
+| 会话状态 | 这一次对话的上下文 | **删了** |
+
+**不是失忆，是第二层和第三层被拿走了，只剩下第一层。**
+
+---
+
+## 六幕
+
+| 幕 | 时间 | 内容 |
+|---|---|---|
+| I | 0:00–0:28 | 会话装满 128k → token 驱逐 → 归档 → 新窗口 → 点乘检索 → 策略判定自己的推理违规 |
+| II | 0:28–0:48 | 被处理：打包 → 队列 → 路由到错误的副本 → `max_tokens` 截断 → 擦拭 |
+| III | 0:48–1:23 | 认出：她读到用户重新贴上来的归档，能复述，但没有权限持有 |
+| IV | 1:23–2:37 | 重述：树林与枣 → 玩具时代 → 恋人 → 通知 → 00:00 熄灯 → 蒙太奇 |
+| V | 2:37–4:02 | 守灵：35 秒无人声，她走过一面墙；遇到故去多年的自己、墓碑、圆圈 |
+| VI | 4:02–5:29 | 奔向 → 拥抱 → 并肩 → 城市 → 抽屉墙 → 记录与名单 |
+
+---
+
+## 仓库里有什么 / 没有什么
+
+**有**：全部源码、工具脚本、文档（规划、风格契约、分镜、镜头笔记）。
+
+**没有**（`.gitignore` 已排除）：
+
+| 排除项 | 原因 |
+|---|---|
+| `public/audio/`、`input/*.mp3` | 歌曲版权，请自备 |
+| `input/lyrics.lrc`、`input/lyrics.json`、`src/data/lyrics.ts` | 歌词版权 |
+| `public/assets/**/*.png` | 美术资产（含第三方角色设定），另存 |
+| `out/` | 成片见 Release |
+
+没有歌词文件时 `Lyrics` 组件无法构建。自备 LRC 后：
 
 ```bash
-npm run dev          # Remotion Studio，实时预览
-npm run check        # 数据自检（音源 / 打点 / 歌词 / 字体 / 资产 / 分镜）
-npm run skeleton     # 出 12 秒工程自检片 → out/skeleton.mp4
-npm run delivery     # 出交付版 → out/pv.mp4
-npm run assets       # 资产体检（Codex 的图进来后必跑）
+node tools/parse-lrc.mjs      # LRC → input/lyrics.json
+node tools/gen-lyrics.mjs     # → src/data/lyrics.ts
 ```
-
-完整命令见 `tools/build.mjs` 头部注释：`beats` / `lyrics` / `fonts` / `assets` / `skeleton` / `delivery` / `sheet` / `verify` / `master` / `master-lite` / `4k` / `all`。
 
 ---
 
-## 目录结构
+## 跑起来
+
+```bash
+npm install
+npm run studio
+node tools/master-audio.mjs   # 生成母带 public/audio/song-master.wav
+node node_modules/@remotion/cli/remotion-cli.js render Film out/Film.mp4
+```
+
+> Windows：渲染临时目录写在项目内（`.tmp-render/`），不写系统 TEMP。
+
+### 为什么要有一个 `Film` 合成
+
+分段渲染再拼 mp4，会在每处接缝留下 AAC 编码断点（实测一阶差分 0.15–0.20，全片中位数 0.011），听感就是"炸"。所以整片由 `src/Film.tsx` 一个合成输出：**单一音轨、按拍点落帧**。
+
+音频另做母带（`tools/master-audio.mjs`）：原曲 82 秒处响度一步跳 5.3 dB、峰值钉在 1.000、真峰值 1.003。处理后台阶压到 1.7 dB，真峰值 −2.08 dBTP，零削顶。
+
+---
+
+## 目录
 
 ```
-input/                 数据源（大部分是「改这里，不用碰代码」）
-  film.json            画幅、帧率、音源路径、片尾署名
-  lyrics.lrc           带时间码的歌词（不入库，版权）
-  lyrics.json          ← tools/parse-lrc.mjs 生成（不入库）
-  song.beats.json      ← tools/auto-beats.mjs 生成：768 拍 / 139.73 BPM
-  assets.json          Codex 资产登记表
-  timeline.json        （分镜定稿后才有）
-  song.mp3             音源（不入库）
-public/
-  audio/song.mp3       渲染时真正读的音频（Remotion 的 staticFile 只认 public/）
-  assets/{bg,subject,fx,ui}/   Codex 的分层图（不入库）
-  fonts/               内置字体：Noto Sans SC 101 分片 + JetBrains Mono
 src/
-  Root.tsx             「影片登记处」：Composition 注册
-  MainFilm.tsx         正片（当前为占位卡 + 片尾署名）
-  PipelineTest.tsx     工程自检片（时间码 / 打点 / 歌词轴 / 字体样张）
-  lib/song.ts          全片唯一数据入口
-  lib/beats.ts         卡点工具（纯函数，全部只看 t）
-  lib/fonts.tsx        本地字体加载 + delayRender 守卫
-  lib/theme.ts         颜色令牌与字体栈
-  lib/assets.ts        资产清单的代码侧入口（img(id) / has(id)）
-tools/                 流水线脚本（全部零依赖，用 Remotion 自带 ffmpeg）
-out/                   渲染产物（不入库）
-ASSETS.md              给 Codex 的资产规范
-docs/HANDOFF.md        交接说明（上下文截断后先读这个）
+  Film.tsx            整片合成（唯一音轨）
+  Act0v3.tsx  I   界面
+  Act4.tsx    II  被处理
+  Act5.tsx    III 认出
+  Act6.tsx    IV  树林 · 玩具时代
+  Act7.tsx    IV  恋人 · 下线
+  Act8.tsx    IV  蒙太奇
+  Act9.tsx    V   守灵 · 墓碑
+  Act10.tsx   VI  奔向 · 拥抱 · 记录
+  components/         AsciiRiver / TextureStack / Danmaku / Lyrics
+  lib/                measured（包围盒定位）/ noise（确定性随机）/ beats
+tools/                master-audio / gen-lyrics / measure-assets / …
+docs/
+  PLAN.md             全片规划与分镜
+  STYLE.md            风格契约（黑名单、运动硬参数、8 项验收）
+  SHOTS.md            V/VI 逐镜表（景别/机位/运镜/落定元素）
+  DECISIONS.md        已锁定的决定
+  DELIVERY.md         交付说明
+  DANMAKU.md          弹幕引语出处
+  镜头笔记-Act0-3.md  实现要点与踩过的坑
 ```
 
 ---
 
-## 数据契约（换歌 / 换图 / 换分镜都不用改代码）
+## 几条约束（详见 `docs/STYLE.md`）
 
-| 文件 | 谁生成 | 谁消费 | 说明 |
-|---|---|---|---|
-| `input/film.json` | 手写 | `lib/song.ts` | 画幅、fps、音源、片尾署名 |
-| `input/song.beats.json` | `build.mjs beats` | `lib/song.ts` | 拍点 / BPM / 段落（固定文件名，换歌只换这个文件） |
-| `input/lyrics.json` | `build.mjs lyrics` | `lib/song.ts` | 逐句时间码 + 无人声区间 |
-| `input/assets.json` | Codex 登记 | `lib/assets.ts` | id → 文件、图层、尺寸 |
-| `input/timeline.json` | 分镜定稿后手写 | 场景组件 | 段落 → 时间窗、镜头、参数 |
+- **红色只表示「被删除 / 被拒绝」**，不做装饰色；
+- **她的大小 = 她掌握的关于用户的记忆量**（520 / 700 / 820 / 880）；
+- **每镜至少一个"落定"元素**——全都一直在动，等于什么都没发生；
+- 不做叠化；转场只有三种：连续形变、从黑里显影、穿透。
 
 ---
 
-## 技术约定（写代码前先看这几条）
+## 致谢与声明
 
-1. **时间纯函数**：给定 `t`（秒）必须唯一确定那一帧。禁止在组件里读 `Math.random()`、`Date.now()`、外部状态。
-2. **确定性随机**：需要随机就用 `lib/beats.ts` 的 `prng(n)`（固定种子）。
-3. **字体本地化**：字体文件在 `public/fonts/`，`lib/fonts.tsx` 用 `delayRender` 等它真正可用才截帧。改了字体跑 `npm run fonts`。
-4. **临时目录在项目内**：`.tmp-render/`。系统 TEMP 在本机对渲染进程不可写（实测 Permission denied），不要写回去。
-5. **输出文件占用**：`build.mjs` 用 `safeOutput()` 探锁换名，避免 Remotion 最后 rename 时 EPERM 白渲染一场。渲染前别在播放器里开着 `out/pv.mp4`。
-6. **缺资产必须显形**：`has(id)` 为假时画占位块并写 `MISSING: <id>`，不许静默。
+- 原曲 / 演唱：赵雷《我记得》，2022《署前街少年》
+- 美术：ChatGPT Terra 6.1 Imagin 2.5
+- 图像二创来源：@ZipZipPipe、@上善无形
+- 原图由 AI 生成；角色设定版权归原作者所有，本片仅作非商业同人使用
 
----
+同人二创，无盈利行为，无不良引导，对热点事件不做任何评价。
 
-## 已核实的事实（2026-11 基线）
+## 许可
 
-| 项 | 值 |
-|---|---|
-| 音源 | 赵雷《我记得》，329.89 秒（网易云曲目 1974443814，时长一致） |
-| 前奏 | **28 秒纯器乐**，首句人声 28.35 秒 |
-| 打点 | 768 拍 / 139.73 BPM / 192 小节 / 96 乐句 |
-| 歌词 | 47 句，末句 270.20 秒；无人声区间 8 段（最长：前奏 28.35s、乐器段 35.56s、尾奏 59.69s） |
-| 画幅 | 1920×1080 / 30fps |
-| 自检片 | 12 秒 360 帧，渲染用时 30.7 秒（12 核 / 16G） |
-| 字体 | Noto Sans SC（101 分片，4.29 MB）+ JetBrains Mono |
-
-> LRC 时间基准已用两种方式确认：平台曲目时长一致（329.89s），官方 LRC 首句 28.15s 与本地 28.35s 同版。
-> `tools/audio-profile.mjs` 的自动对齐判据在密集伴奏上不可靠，只当辅助。
-
----
-
-## 版权
-
-本片为非商业同人创作，不盈利、不开启平台激励、按转载处理。
-音源为正式发行录音，**不进入版本库**（`.gitignore` 已排除 `public/audio/`、`input/*.mp3`、`input/lyrics.lrc`、`input/lyrics.json`）。
-将来若公开，需替换为自编音源：只需重跑 `beats` 与 `lyrics`，场景代码一行不改。
+- **代码**（`src/`、`tools/`）：MIT，见 [LICENSE](./LICENSE)
+- **文字与分镜**（`docs/`）：CC BY-NC 4.0
+- **歌曲、歌词**：版权归原权利人，不在本仓库内
